@@ -81,26 +81,31 @@ while True:
         valor = float (input("\nDigite o valor desejado para o saque:"))
         
         if valor > 0:
-            saldo -= valor 
-            saques += 1
-            extrato += f"Saque: R$ {valor:.2f}\n"
-            print(f"Saque de R$ {valor:.2f} realizado com sucesso. \n")
+            if valor > saldo:
+                print("Não foi possível efetuar o saque pois o valor do seu saque é maior que o seu saldo.")
 
 
-        elif valor > saldo:
-            print("Não foi possível efetuar o saque pois o valor do seu saque é maior que o seu saldo.")
+            elif valor > valor_limite:
+                print("Não foi possível realizar o saque pois o valor máximo de saque é R$ 500.")
 
 
-        elif valor > valor_limite:
-            print("Não foi possível realizar o saque pois você não possui limite disponível.")
+            elif saques >= limite_saques:
+                print("Não foi possível continuar pois o limite de saques foi atingido.") 
 
-
-        elif saques > limite_saques:
-            print("Não foi possível continuar pois o limite de saques foi atingido.") 
+            else:
+                saldo -= valor 
+                saques += 1
+                extrato += f"Saque: R$ {valor:.2f}\n"
+                print(f"Saque de R$ {valor:.2f} realizado com sucesso. \n")
+                    
 
 
         else:
             print("Operação falhou!\nDigite um valor correto e tente novamente.")    
+            
+
+
+        
 
 
 
